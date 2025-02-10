@@ -1,0 +1,637 @@
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.error-message {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+
+.form-label {
+  color: #b0c4de;
+  font-weight: 500;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #d0d0d0;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #0066ff;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0052cc;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #b0c4de;
+}
+
+.register-link a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+
+.hero {
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #d0d0d0;
+}
+
+.cta-button {
+  background-color: #0066ff;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #0052cc;
+}
+
+/* Features Section */
+.features {
+  background-color: #f0f0f0;
+  padding: 60px 20px;
+  color: #333;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* .feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  justify-content: center;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+} */
+
+.feature-card:hover {
+  transform: scale(1.05);
+}
+/* 
+.feature-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+} */
+
+.feature-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.feature-description {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Call to Action Section */
+.cta-section {
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.cta-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cta-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #d0d0d0;
+}
+
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Set it to 3 columns to keep them centered */
+  gap: 20px;
+  padding: 0 20px;
+  max-width: 900px; /* Restrict max width to center the grid */
+  justify-items: center; /* Center each item in its grid cell */
+}
+
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(156, 148, 148, 0.1);
+  transition: transform 0.3s;
+}
+
+.feature-image {
+  width: 80%; /* Set width to control size within the container */
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Makes the image circular */
+  margin-bottom: 20px;
+  object-fit: cover; /* Ensures the image fills the circle */
+  border: 2px solid #ffffff44; /* Optional border to enhance visibility */
+}
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.register-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-title {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+.error-message {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.form-label {
+  color: #b0c4de;
+  font-weight: 500;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #d0d0d0;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #0066ff;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: #0052cc;
+}
+
+.login-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #b0c4de;
+}
+
+.login-link a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #ffffff44;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: #d0d0d0;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #0052cc;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .navbar-brand {
+      font-size: 1.2rem;
+  }
+  .nav-link {
+      font-size: 0.9rem;
+      padding: 6px 12px;
+  }
+}
+
+.create-milestone-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #1e3c72, #1a1b1c, #000);
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.header-content .hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.header-content .hero-subtitle {
+  font-size: 1.2rem;
+  color: #d0d0d0;
+}
+
+.milestone-form {
+  padding: 40px 20px;
+  background-color: #f0f0f0;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.form-label {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  flex: 1;
+}
+
+.form-control {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  flex: 3;
+}
+
+.form-control:focus {
+  border-color: #0052cc;
+  box-shadow: 0 0 5px rgba(0, 82, 204, 0.3);
+}
+
+.ai-button {
+  background-color: #0066ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.ai-button:hover {
+  background-color: #0052cc;
+}
+
+.create-button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #0066ff;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-button:hover {
+  background-color: #0052cc;
+}
+
+.milestone-inputs {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.milestone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  color: darkred;
+}
+
+.plus-button {
+  display: block;
+  margin: 1rem auto;
+  font-size: 2rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.plus-button:hover {
+  background: #0056b3;
+}
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  width: calc(33.333% - 20px); /* Adjust for responsive layout */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.project-info {
+  margin-bottom: 12px;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  color: black;
+  margin: 0;
+}
+
+.project-teams,
+.project-dates,
+.project-milestones {
+  margin: 4px 0;
+  color: #555;
+}
+
+.project-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background: #dc3545;
+  color: white;
+}
+
+.details-link {
+  font-size: 1.5rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.details-link:hover {
+  color: #0056b3;
+}
+
+
+/* new css */
+.create-milestone-page {
+  background-color: #f9f9f9;
+}
+
+.milestone-card {
+  border: 1px solid #ddd;
+}
+
+.milestone-card .card-header {
+  font-weight: bold;
+}
+
+.ai-button {
+  font-size: 0.9rem;
+}
+
+.add-milestone-button {
+  font-size: 1rem;
+}
+
+.create-button {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+
+.modal-overlay {
+  display: flex; /* Ensure modal overlay is displayed */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it overlays other elements */
+}
