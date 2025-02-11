@@ -3,7 +3,7 @@ export default {
  <div>
     <div>
     <nav class="navbar">
-      <a href="#" class="navbar-brand">Project Tracker</a>
+      <a href="#" class="navbar-brand">Seek</a>
       <div class="nav-links">
         <!-- Notifications Button -->
         <button v-if="is_login & role === 'student'" class="nav-link" @click="toggleNotifications">

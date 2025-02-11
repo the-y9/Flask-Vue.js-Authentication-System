@@ -9,8 +9,8 @@ export default {
           <h1 class="login-title">Please Login</h1>
           
           <div class="form-group">
-            <label for="username" class="form-label">Email</label> 
-            <input type="text" class="form-control" id="email" v-model="cred.email" placeholder="Enter your email">
+            <label for="username" class="form-label">Username</label> 
+            <input type="text" class="form-control" id="username" v-model="cred.username" placeholder="Enter your username">
           </div>
           
           <div class="form-group">
@@ -29,7 +29,7 @@ export default {
     data() {
       return {
         cred: {
-          email: null,
+          username: null,
           password: null,
         },
         error: null,
@@ -67,6 +67,13 @@ export default {
           console.log("Error is := " ,error)
         }
       }
-    }
+    },
+    mounted() {
+      const message = this.$route.query.message;
+      if (message) {
+        console.log("Message is :=", message);
+        this.error = message;
+      }
+    }    
   }
   

@@ -54,7 +54,10 @@ export default {
         const data = await res.json()
         if(res.ok){
             console.log(data);
-            this.$router.push('/login');
+            this.$router.push({
+                path: '/login',
+                query: { message: data.message }
+            });
         }
         else {
             this.error = data.message

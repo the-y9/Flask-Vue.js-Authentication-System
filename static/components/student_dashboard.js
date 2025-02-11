@@ -3,7 +3,7 @@ export default {
     <div class="student-dashboard-page">
       <section class="page-header">
         <div class="header-content">
-          <h1 class="hero-title">Student Dashboard</h1>
+          <h1 class="hero-title">Member Dashboard</h1>
           <p class="hero-subtitle">View your project milestones, upload documents, and check feedback.</p>
         </div>
       </section>

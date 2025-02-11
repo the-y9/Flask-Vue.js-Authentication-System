@@ -4,7 +4,7 @@
   }
   
   .dashboard-header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298, #000);
+    background: var(--primary-gradient);
     padding: 60px 20px;
     text-align: center;
     color: #fff;
