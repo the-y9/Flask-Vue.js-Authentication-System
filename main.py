@@ -3,10 +3,7 @@ import sys
 from backend.models import db, User, Role
 from backend.config import DevelopmentConfig
 from backend.security import datastore
-# from backend.resources import api
-from backend.instance import cache
-# from backend.team_api import team_api_bp
-# from backend.other_api import other_api_bp
+from backend.rcs import api
 
 def install(package):
     try:
@@ -34,7 +31,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
-    # api.init_app(app)
+    api.init_app(app)
     datastore = SQLAlchemyUserDatastore(db,User,Role)
     app.security = Security(app, datastore)
 
@@ -66,9 +63,5 @@ def before_request():
     if not token:
         return jsonify({"message": "Authorization token is missing!"}), 401
 
-
-
-# app.register_blueprint(team_api_bp)
-# app.register_blueprint(other_api_bp)
 if __name__ == '__main__':
     app.run(debug=True)

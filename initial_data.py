@@ -1,9 +1,11 @@
+import random
 import sys
+import traceback
 from main import app
 from backend.security import datastore
 from backend.models import db, Role, User, Event, Chatbot, ChatbotArticle, HealthMetric, HealthTracker, Dashboard, Notification
 from werkzeug.security import generate_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta
 
 with app.app_context():
     db.create_all()
@@ -27,14 +29,14 @@ with app.app_context():
     except Exception as e:
         with open("error_initial_data.txt", "w") as file:
             file.write(f"ERROR: {e}\n")
-        rootprint(f"ERROR: {e}")
+        print(f"ERROR: {e}")
         sys.exit("Exiting the program due to an exception.\n{e}")
 
     # Define user data
     users_data = [
-        {"email": "root@g.com", "username": "root", "password": "r", "roles": "root"},
-        {"email": "coach@g.com", "username": "coach", "password": "c", "roles": "coach"},
-        {"email": "member@g.com", "username": "mem", "password": "m", "roles": "member"},
+        {"email": "root@g.com", "username": "root", "password": "r", "roles": ["root"]},
+        {"email": "coach@g.com", "username": "coach", "password": "c", "roles": ["coach"]},
+        {"email": "member@g.com", "username": "mem", "password": "m", "roles": ["member"]},
     ]
 
     # Create users
@@ -53,7 +55,8 @@ with app.app_context():
     except Exception as e:
         with open("error_initial_data.txt", "w") as file:
             file.write(f"ERROR: {e}\n")
-        rootprint(f"ERROR: {e}")
+        print(f"{traceback.format_exc()}\n")
+        print(f"ERROR: {e}")
         sys.exit("Exiting the program due to an exception.\n{e}")
 
     # Events data
@@ -165,3 +168,41 @@ with app.app_context():
             file.write(f"ERROR: {e}\n")
         print(f"ERROR: {e}")
         sys.exit("Exiting the program due to an exception.\n{e}")
+
+
+    try:
+        # Fetch all users and assume some are coaches
+        users = User.query.all()
+        coaches = [user for user in users if 'coach' in [role.name for role in user.roles]]
+
+        if not users or not coaches:
+            print("No users or coaches available. Ensure database has users with assigned roles.")
+        else:
+            dummy_entries = []
+            
+            for user in users:
+                assigned_coach = random.choice(coaches)  # Assign a random coach
+                health_data = {
+                    "weight": round(random.uniform(50, 100), 2),
+                    "bmi": round(random.uniform(18.5, 30), 2),
+                    "body_fat_percentage": round(random.uniform(10, 25), 2),
+                    "steps": random.randint(3000, 15000),
+                    "calories_burned": random.randint(1000, 3000)
+                }
+                
+                entry = HealthTracker(
+                    user_id=user.id,
+                    coach_id=assigned_coach.id,
+                    recorded_at=datetime.utcnow() - timedelta(days=random.randint(0, 30)),
+                    health_data=health_data
+                )
+                dummy_entries.append(entry)
+            
+            db.session.bulk_save_objects(dummy_entries)
+            db.session.commit()
+            print(f"Inserted {len(dummy_entries)} dummy health tracker records.")
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error inserting dummy health tracker records: {e}")
+        sys.exit("Exiting the program due to an exception at HealthTracker.\n{e}")    

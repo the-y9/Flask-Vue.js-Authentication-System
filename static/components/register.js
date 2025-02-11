@@ -21,7 +21,7 @@ export default {
             <input type="password" class="form-control" id="password" v-model="cred.password" placeholder="Enter your password">
         </div>
 
-        <button class="btn btn-primary register-button" @click="register">Register</button>
+        <button class="btn btn-primary button-1" @click="register">Register</button>
 
         <p class="login-link text-center">
             Already have an account? <router-link to="/login">Login</router-link>

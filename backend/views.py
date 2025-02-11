@@ -5,12 +5,20 @@ from backend.security import datastore
 from flask_restful import marshal, fields
 import flask_excel as excel
 from .models import User, db
-from sqlalchemy import or_ 
+from sqlalchemy import or_, inspect
 import smtplib
+import subprocess
 
 @app.get('/')
 def home():
     return render_template('index.html')
+
+# @app.before_request
+# def check_and_initialize_db():
+#     if not inspect(db.engine).has_table('user'):
+#         print("User table not found! Running initial_data.py to create the table...")
+#         subprocess.run(["python", "initial_data.py"])
+
 
 @app.get('/root')
 @auth_required("token")
@@ -66,7 +74,11 @@ def user_login():
     
     if check_password_hash(user.password, data.get("password")):
         if user.active:
-            return jsonify({"token":user.get_auth_token(),"id":user.id,"username":user.username,"role":user.roles[0].name}),200
+            return jsonify({"token":user.get_auth_token(),
+                            "id":user.id,
+                            "username":user.username,
+                            "role":user.roles[0].name,
+                            "message": "Authentication Successful"}), 200
         else:
             return jsonify({"message":"User not activated"}),401
     

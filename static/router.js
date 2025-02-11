@@ -1,9 +1,7 @@
-import avroutes from './av.js'
-import ntroutes from './nt.js'
+import basic from './basic.js'
 
 const routes = [
-    ...avroutes,
-    ...ntroutes
+    ...basic
 ] 
 
 export default new VueRouter({

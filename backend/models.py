@@ -33,6 +33,7 @@ class User(db.Model, UserMixin):
 class Role(db.Model, RoleMixin):
     __tablename__ = "role"
     id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(10), db.CheckConstraint("category IN ('Primary', 'Secondary', 'Tertiary')"))
     name = db.Column(db.String(80), unique=True, nullable=False)  
     description = db.Column(db.String(255))
     
@@ -101,7 +102,8 @@ class HealthMetric(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     coach_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     name = db.Column(db.String(255), unique=True, nullable=False)  
-    unit = db.Column(db.String(50), nullable=True)  
+    unit = db.Column(db.String(50), nullable=True)
+    # normal_range = db.Column(db.String(50))  
 
     def __str__(self):
         return f"{self.name} ({self.unit})"
@@ -117,6 +119,15 @@ class HealthTracker(db.Model):
 
     def __str__(self):
         return f"Health Data of {self.user_id} ({self.recorded_at})"
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "coach_id": self.coach_id,
+            "recorded_at": self.recorded_at.isoformat() if self.recorded_at else None,  # Convert datetime to string
+            "health_data": self.health_data  # Return health data as-is (JSON format)
+        }   
 
 
 # --- Dashboard ---

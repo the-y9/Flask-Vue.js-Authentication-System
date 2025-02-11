@@ -1,1 +1,1 @@
-ERROR: name 'Notifications' is not defined
+ERROR: 'str' object does not support item assignment

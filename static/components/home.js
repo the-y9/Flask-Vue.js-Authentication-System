@@ -1,20 +1,22 @@
-export default  {
-    template: `
-     <div class="landing-page">
-
-      <section class="hero">
-        <div class="hero-content">
-          <h1 class="hero-title">Track Your Project Milestones Effortlessly</h1>
-          <p class="hero-subtitle">Stay on top of your project’s progress, deadlines, and key milestones with ease.</p>
-          <button class="cta-button" @click="goToRegister">Get Started</button>
+export default {
+  template: `
+    <div class="landing-page">
+    
+      <!-- poster Section -->
+      <section class="poster">
+        <div class="poster-content">
+          <h1 class="poster-title">Seek</h1>
+          <p class="poster-subtitle">Sort and manage your club.</p>
+          <button class="button-1" @click="goToRegister">Get Started</button>
         </div>
       </section>
 
+      <!-- Features Section -->
       <section class="features">
-        <h2 class="section-title">Why Choose Us?</h2>
+        <h2 class="section-title">Why Choose Our Authentication System?</h2>
         <center>
         <div class="feature-cards">
-          <div class="feature-card" v-for="feature in features" :key="feature.id" >
+          <div class="feature-card" v-for="feature in features" :key="feature.id">
             <img :src="feature.image" alt="Feature Image" class="feature-image" />
             <h3 class="feature-title">{{ feature.title }}</h3>
             <p class="feature-description">{{ feature.description }}</p>
@@ -23,26 +25,44 @@ export default  {
         </center>
       </section>
 
+      <!-- Call-to-Action Section -->
       <section class="cta-section">
-        <h2 class="cta-title">Ready to Get Started?</h2>
-        <p class="cta-subtitle">Sign up today and start managing your project milestones like a pro.</p>
+        <h2 class="cta-title">Ready to Build Your Account?</h2>
+        <p class="cta-subtitle">Sign up today to manage your login credentials and access secure features.</p>
         <button class="cta-button" @click="goToRegister">Sign Up Now</button>
       </section>
-    </div>`,
-    data(){
-        return {
-            userRole: localStorage.getItem('role'),
-            features: [
-                { id: 1, title: "Real-Time Tracking", description: "Monitor project milestones in real time and stay updated with every step.", image: "static/images/2880399.jpg" },
-                { id: 2, title: "Team Collaboration", description: "Collaborate with your team and keep everyone aligned on project goals.", image: "static/images/2996609.jpg" },
-                { id: 3, title: "Detailed Reporting", description: "Generate reports to get insights on your project’s progress and performance.", image: "static/images/20945194.jpg" },
-              ]
-        }
-    },
 
-    methods: {
-        goToRegister(){
-            this.$router.push('/register')
+    </div>
+  `,
+  data() {
+    return {
+      userRole: localStorage.getItem('role'),
+      features: [
+        { 
+          id: 1, 
+          title: "Secure Login", 
+          description: "Provides a secure login system using hashed passwords for user authentication.", 
+          image: "static/images/hash.png" 
+        },
+        { 
+          id: 2, 
+          title: "Role-Based Authorization", 
+          description: "Easily manage different user roles and control access based on user privileges.", 
+          image: "static/images/role.png" 
+        },
+        { 
+          id: 3, 
+          title: "Easy User Registration", 
+          description: "Simple sign-up process to create a new account and start using the system immediately.", 
+          image: "static/images/signup.jpg" 
         }
-    },
+      ]
+    }
+  },
+  
+  methods: {
+    goToRegister() {
+      this.$router.push('/register');
+    }
+  }
 }

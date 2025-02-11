@@ -18,7 +18,7 @@ export default {
             <input type="password" class="form-control" id="user_password" v-model="cred.password" placeholder="Enter your password">
           </div>
           
-          <button class="btn btn-primary login-button" @click="login">Login</button>
+          <button class="btn btn-primary button-1" @click="login">Login</button>
           
           <p class="register-link text-center">
             Don't have an account? <router-link to="/register">Register</router-link>
@@ -53,18 +53,19 @@ export default {
             localStorage.setItem('role', data.role)
             localStorage.setItem('username', data.username)
             localStorage.setItem('user_id', data.id)
+            
             if (data.role == "member"){
-            this.$router.push({ path: '/student_dashboard' })
+            this.$router.push({ path: '/member' })
             }
             else if (data.role == "root" || data.role == "coach" || data.role == "ta" ){
-                this.$router.push({ path: '/instructor_dashboard' })
+                this.$router.push({ path: '/coach' })
             }
           } else {
             this.error = data.message
           }
-          console.log(error)
+          // console.log(error)
         } catch (error) {
-          console.log("Error is := " ,error)
+          console.log("ERROR:" ,error)
         }
       }
     },

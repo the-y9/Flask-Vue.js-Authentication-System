@@ -74,7 +74,7 @@
   box-shadow:  0 0 8px rgba(42, 157, 143, 0.8);
 }
 
-.login-button {
+.button-1 {
   width: 100%;
   padding: 12px 0;
   font-size: 1rem;
@@ -88,7 +88,7 @@
   color: white;
 }
 
-.login-button:hover {
+.button-1:hover {
   background: var(--hover-secondary);
   /* background-color: #0052cc; */
 }
@@ -109,7 +109,7 @@
 }
 
 
-.hero {
+.poster {
   background: var(--primary-gradient);
   display: flex;
   align-items: center;
@@ -118,20 +118,20 @@
   padding: 100px 20px;
 }
 
-.hero-content {
+.poster-content {
   max-width: 700px;
 }
 
 
 
-.hero-title {
+.poster-title {
   font-size: 2.8rem;
   font-weight: bold;
   margin-bottom: 10px;
   color: white;
 }
 
-.hero-subtitle {
+.poster-subtitle {
   font-size: 1.2rem;
   margin-bottom: 20px;
   color: #d0d0d0;
@@ -323,22 +323,6 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
 }
 
-.register-button {
-  width: 100%;
-  padding: 12px 0;
-  font-size: 1rem;
-  font-weight: bold;
-  background: var(--secondary-gradient);
-  border: none;
-  border-radius: 8px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.register-button:hover {
-  background: var(--hover-secondary);
-}
-
 .login-link {
   margin-top: 20px;
   font-size: 0.9rem;
@@ -410,37 +394,7 @@ body {
   }
 }
 
-.create-milestone-page {
-  font-family: Arial, sans-serif;
-  color: #333;
-}
 
-.page-header {
-  background: var(--primary-gradient);
-  padding: 60px 20px;
-  text-align: center;
-  color: #fff;
-}
-
-.header-content .hero-title {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.header-content .hero-subtitle {
-  font-size: 1.2rem;
-  color: #d0d0d0;
-}
-
-.milestone-form {
-  padding: 40px 20px;
-  background-color: #f0f0f0;
-  max-width: 800px;
-  margin: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
 .form-group {
   margin-bottom: 20px;
@@ -472,187 +426,4 @@ body {
 .form-control:focus {
   border-color: #0052cc;
   box-shadow: 0 0 5px rgba(0, 82, 204, 0.3);
-}
-
-.ai-button {
-  background-color: #0066ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin-left: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.ai-button:hover {
-  background-color: #0052cc;
-}
-
-.create-button {
-  width: 100%;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background-color: #0066ff;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.create-button:hover {
-  background-color: #0052cc;
-}
-
-.milestone-inputs {
-  margin-bottom: 30px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.milestone-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.remove-button {
-  background: none;
-  border: none;
-  color: red;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.remove-button:hover {
-  color: darkred;
-}
-
-.plus-button {
-  display: block;
-  margin: 1rem auto;
-  font-size: 2rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-}
-
-.plus-button:hover {
-  background: #0056b3;
-}
-.project-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.project-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  background: #fff;
-  width: calc(33.333% - 20px); /* Adjust for responsive layout */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.project-info {
-  margin-bottom: 12px;
-}
-
-.project-title {
-  font-size: 1.5rem;
-  color: black;
-  margin: 0;
-}
-
-.project-teams,
-.project-dates,
-.project-milestones {
-  margin: 4px 0;
-  color: #555;
-}
-
-.project-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.edit-button,
-.delete-button {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-button {
-  background: #007bff;
-  color: white;
-}
-
-.delete-button {
-  background: #dc3545;
-  color: white;
-}
-
-.details-link {
-  font-size: 1.5rem;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.details-link:hover {
-  color: #0056b3;
-}
-
-
-/* new css */
-.create-milestone-page {
-  background-color: #f9f9f9;
-}
-
-.milestone-card {
-  border: 1px solid #ddd;
-}
-
-.milestone-card .card-header {
-  font-weight: bold;
-}
-
-.ai-button {
-  font-size: 0.9rem;
-}
-
-.add-milestone-button {
-  font-size: 1rem;
-}
-
-.create-button {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-
-.modal-overlay {
-  display: flex; /* Ensure modal overlay is displayed */
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000; /* Ensure it overlays other elements */
 }
