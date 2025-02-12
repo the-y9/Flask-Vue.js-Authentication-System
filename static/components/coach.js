@@ -8,23 +8,26 @@ export default {
                     </section>
 
                     <section class="features">
-                            <div>
-                                <canvas id="bmiChart"></canvas>
-                            </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <canvas id="bmiChart" width="100%"></canvas>
+                                </div>
+                                <div class="col-md-3">
+                                    <br><br><br>
+                                    <button class='btn btn-info ' @click="toggleChartData">Toggle Data</button>
+                                </div>
+                            </div>    
+                        </div>
                             
                         <!-- Check if health data is available -->
                         <div v-if="healthData && healthData.data">
-                            <button class='btn btn-info ' @click="toggleChartData">Toggle Data</button>
             
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>Recorded At</th>
-                                        <th>BMI</th>
-                                        <th>Body Fat Percentage</th>
-                                        <th>Calories Burned</th>
-                                        <th>Steps</th>
-                                        <th>Weight</th>
+                                        <th v-for="(value, key) in healthData.data[0].health_data" :key="key">{{ formatKey(key) }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,6 +60,8 @@ export default {
         showCalories: false,
         showSteps: false,
         showWeight: false,
+        order: 0,
+        chartInstance: null,
     };
   },
 
@@ -72,15 +77,18 @@ export default {
         }
         this.healthData = data;
         const hdata = this.healthData.data;
-        this.renderBMIChart(hdata);
+        this.renderChart(hdata);
     } catch (error) {
         console.error('Error fetching data:', error);
-        alert('Failed to load projects. Please try again later.');
     }    
         
     },
 
   methods: {
+    formatKey(key) {
+        // Format the key for table headers (e.g., bmi -> BMI)
+        return key.replace(/_/g, ' ').toUpperCase();
+      },  
     local(isoDatetimeStr) {
         // Step 1: Create a Date object from the ISO 8601 datetime string
         const date = new Date(isoDatetimeStr);
@@ -96,7 +104,6 @@ export default {
         //   timeZoneName: 'short' // Example: "EST"
         };
         
-        // Step 3: Format the date into a human-readable format
         const humanReadable = date.toLocaleString('en-IN', options);
         return humanReadable;
       },
@@ -112,51 +119,117 @@ export default {
         return humanReadable;
       },
       
-      async renderBMIChart(hdata) {
+      async renderChart(hdata) {
         const canvas = document.getElementById('bmiChart');
-      if (!canvas) {
-        console.error('Canvas element not found!');
-        return;
-      }
+        if (!canvas) {
+            console.error('Canvas element not found!');
+            return;
+        }
         if (!hdata) {
             console.error('No health data available.');
             return;
         }
 
-        const labels = await hdata.map(record => this.dat(record.recorded_at)); // Date as x-axis
-        const bmiData = await hdata.map(record => record.health_data.bmi); // BMI data
+        const labels = hdata.map((record) => this.dat(record.recorded_at)); // Date as x-axis
 
-        // const labels = [1,2,3,4,5]
-        // const bmiData = [1,2,3,4,5]
+        const datasets = [];
 
-        const ctx = document.getElementById('bmiChart').getContext('2d');
-        new Chart(ctx, {
+        // Add each dataset conditionally based on the toggled values
+        if (this.showBMI) {
+            datasets.push({
+                label: 'BMI',
+                data: hdata.map((record) => record.health_data.bmi),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1,
+            });
+        }
+
+        if (this.showBodyFat) {
+            datasets.push({
+                label: 'Body Fat Percentage',
+                data: hdata.map((record) => record.health_data.body_fat_percentage),
+                borderColor: 'rgba(255, 99, 132, 1)',
+                tension: 0.1,
+            });
+        }
+
+        if (this.showCalories) {
+            datasets.push({
+                label: 'Calories Burned',
+                data: hdata.map((record) => record.health_data.calories_burned),
+                borderColor: 'rgba(54, 162, 235, 1)',
+                tension: 0.1,
+            });
+        }
+
+        if (this.showSteps) {
+            datasets.push({
+                label: 'Steps',
+                data: hdata.map((record) => record.health_data.steps),
+                borderColor: 'rgba(153, 102, 255, 1)',
+                tension: 0.1,
+            });
+        }
+
+        if (this.showWeight) {
+            datasets.push({
+                label: 'Weight',
+                data: hdata.map((record) => record.health_data.weight),
+                borderColor: 'rgba(255, 159, 64, 1)',
+                tension: 0.1,
+            });
+        }
+
+        const ctx = canvas.getContext('2d');
+
+        if (this.chartInstance) {
+            this.chartInstance.destroy();
+          }
+
+        this.chartInstance = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: 'BMI',
-                    data: bmiData,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    // backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    // fill: true,
-                    tension: 0.1
-                }]
+                datasets: datasets,
             },
             options: {
                 responsive: true,
                 scales: {
                     x: {
-                        title: {display: true, text: 'Date'}
+                        title: { display: true, text: 'Date' },
                     },
                     y: {
-                        title: {display: true, text: 'BMI'},
-                        min: 15
-                    }
-                }
-            }
+                        title: { display: true, text: 'Values' },
+                        min: 0,
+                    },
+                },
+            },
         });
+    },
+
+    toggleChartData() {
+        this.order = (this.order + 1)%5;
+
+        if (this.order === 0){
+            this.showWeight = false;
+            this.showBMI = true;
+        }else if (this.order === 1){
+            this.showBMI = false;
+            this.showBodyFat = true;
+        }else if (this.order === 2){
+            this.showBodyFat = false;
+            this.showCalories = true;
+        }else if (this.order === 3){
+            this.showCalories = false;
+            this.showSteps = true;
+        }else if (this.order === 4){
+            this.showSteps = false;
+            this.showWeight = true;
         }
+
+        const hdata = this.healthData.data;
+        this.renderChart(hdata);
+    },
     }
 };
 

@@ -16,7 +16,7 @@ class HealthTrackerRCS(Resource):
     def get(self, user_id):
         if user_id:
             try:
-                health_tracker = HealthTracker.query.filter_by(user_id=user_id).all()
+                health_tracker = HealthTracker.query.filter_by(user_id=user_id).order_by(HealthTracker.recorded_at.asc()).all()
                 if not health_tracker:
                     return jsonify({"message": "No health data found for the user."})
                 return jsonify({"data": [health.serialize() for health in health_tracker]})
