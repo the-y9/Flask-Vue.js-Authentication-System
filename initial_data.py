@@ -181,22 +181,23 @@ with app.app_context():
             dummy_entries = []
             
             for user in users:
-                assigned_coach = random.choice(coaches)  # Assign a random coach
-                health_data = {
-                    "weight": round(random.uniform(50, 100), 2),
-                    "bmi": round(random.uniform(18.5, 30), 2),
-                    "body_fat_percentage": round(random.uniform(10, 25), 2),
-                    "steps": random.randint(3000, 15000),
-                    "calories_burned": random.randint(1000, 3000)
-                }
-                
-                entry = HealthTracker(
-                    user_id=user.id,
-                    coach_id=assigned_coach.id,
-                    recorded_at=datetime.utcnow() - timedelta(days=random.randint(0, 30)),
-                    health_data=health_data
-                )
-                dummy_entries.append(entry)
+                for _ in range(5):
+                    assigned_coach = random.choice(coaches)  # Assign a random coach
+                    health_data = {
+                        "weight": round(random.uniform(50, 100), 2),
+                        "bmi": round(random.uniform(18.5, 30), 2),
+                        "body_fat_percentage": round(random.uniform(10, 25), 2),
+                        "steps": random.randint(3000, 15000),
+                        "calories_burned": random.randint(1000, 3000)
+                    }
+                    
+                    entry = HealthTracker(
+                        user_id=user.id,
+                        coach_id=assigned_coach.id,
+                        recorded_at=datetime.utcnow() - timedelta(days=random.randint(0, 30)),
+                        health_data=health_data
+                    )
+                    dummy_entries.append(entry)
             
             db.session.bulk_save_objects(dummy_entries)
             db.session.commit()

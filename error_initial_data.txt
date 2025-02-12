@@ -1,1 +1,4 @@
-ERROR: 'str' object does not support item assignment
+ERROR: (sqlite3.IntegrityError) UNIQUE constraint failed: health_metric.name
+[SQL: INSERT INTO health_metric (coach_id, name, unit) VALUES (?, ?, ?) RETURNING id]
+[parameters: (2, 'Blood Pressure', 'mmHg')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
