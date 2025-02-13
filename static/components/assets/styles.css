@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #2A9D8F;
+  --primary-color-light: #2A9D8F;
+  --primary-color-dark: #264653;
   --secondary-color: #E9C46A;
   --neutral-bg: #F4F4F4;
   --text-color: #333333;
@@ -72,6 +73,28 @@
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid #2A9D8F;
   box-shadow:  0 0 8px rgba(42, 157, 143, 0.8);
+}
+
+.btn-2{
+  background: var(--primary-color-dark);
+  color: white;
+  border: none;
+  margin: 2px;
+}
+
+.btn-2:hover{
+  background: var(--primary-color-light);
+  color: white;
+}
+
+.btn-2.active {
+  background: var(--primary-color-light);
+  color: white;
+}
+
+.btn-2.active:hover {
+  background: var(--primary-color-light);
+  color: white;
 }
 
 .button-1 {

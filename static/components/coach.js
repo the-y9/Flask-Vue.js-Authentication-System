@@ -14,8 +14,14 @@ export default {
                                     <canvas id="bmiChart" width="100%"></canvas>
                                 </div>
                                 <div class="col-md-3">
-                                    <br><br><br>
-                                    <button class='btn btn-info ' @click="toggleChartData">Toggle Data</button>
+                                <div class="container" >
+                                    <button class="btn btn-2"
+                                        v-for="(value, key) in showData" :key="key" 
+                                        :class="{ active: selectedAttribute === key }" 
+                                        @click="btnClick(key)">
+                                        {{ formatKey(key) }}
+                                        </button>
+                                </div>
                                 </div>
                             </div>    
                         </div>
@@ -34,11 +40,7 @@ export default {
                                     <!-- Loop through the health data and display each record -->
                                     <tr v-for="record in healthData.data" :key="record.id">
                                         <td>{{ local(record.recorded_at) }}</td>
-                                        <td>{{ record.health_data.bmi }}</td>
-                                        <td>{{ record.health_data.body_fat_percentage }}</td>
-                                        <td>{{ record.health_data.calories_burned }}</td>
-                                        <td>{{ record.health_data.steps }}</td>
-                                        <td>{{ record.health_data.weight }}</td>
+                                        <td v-for="(value, key) in record.health_data" :key="key">{{ value }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -55,12 +57,8 @@ export default {
     return {
         username: localStorage.getItem('username'),
         healthData: [],
-        showBMI: true,  // Control which data to show
-        showBodyFat: false,
-        showCalories: false,
-        showSteps: false,
-        showWeight: false,
-        order: 0,
+        showData: {},
+        selectedAttribute: '',
         chartInstance: null,
     };
   },
@@ -68,7 +66,7 @@ export default {
 
   async mounted() {
     try {
-        const id = 2;
+        const id = 3;
         const response = await fetch(`/health-tracker/${id}`);
         const data = await response.json();
 
@@ -77,6 +75,7 @@ export default {
         }
         this.healthData = data;
         const hdata = this.healthData.data;
+        this.initializeShowData(hdata);
         this.renderChart(hdata);
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -95,12 +94,12 @@ export default {
         
         // Step 2: Convert to a human-readable local time string
         const options = {
-          year: 'numeric', // Example: "2025"
-          month: 'long', // Example: "January"
+          year: '2-digit', // Example: "2025"
+          month: 'short', // Example: "Jan"
           day: 'numeric', // Example: "16"
           hour: '2-digit', // Example: "04"
           minute: '2-digit', // Example: "18"
-          second: '2-digit', // Example: "02"
+        //   second: '2-digit', // Example: "02"
         //   timeZoneName: 'short' // Example: "EST"
         };
         
@@ -118,6 +117,18 @@ export default {
         const humanReadable = date.toLocaleString('en-IN', options);
         return humanReadable;
       },
+
+      initializeShowData(hdata) {
+        // Dynamically create showData object based on the keys in health_data
+        if (hdata && hdata.length > 0 && hdata[0].health_data) {
+          const keys = Object.keys(hdata[0].health_data);
+          keys.forEach(key => {
+            this.$set(this.showData, key, false); 
+          });
+            this.showData[keys[0]] = true;
+            this.selectedAttribute = keys[0];
+        }
+      },
       
       async renderChart(hdata) {
         const canvas = document.getElementById('bmiChart');
@@ -134,51 +145,16 @@ export default {
 
         const datasets = [];
 
-        // Add each dataset conditionally based on the toggled values
-        if (this.showBMI) {
+        if (this.selectedAttribute) {
             datasets.push({
-                label: 'BMI',
-                data: hdata.map((record) => record.health_data.bmi),
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.1,
+              label: this.formatKey(this.selectedAttribute),
+              data: hdata.map((record) => record.health_data[this.selectedAttribute]),
+              borderColor: '#2A9D8F',
+              tension: 0.1,
             });
-        }
+          }
 
-        if (this.showBodyFat) {
-            datasets.push({
-                label: 'Body Fat Percentage',
-                data: hdata.map((record) => record.health_data.body_fat_percentage),
-                borderColor: 'rgba(255, 99, 132, 1)',
-                tension: 0.1,
-            });
-        }
-
-        if (this.showCalories) {
-            datasets.push({
-                label: 'Calories Burned',
-                data: hdata.map((record) => record.health_data.calories_burned),
-                borderColor: 'rgba(54, 162, 235, 1)',
-                tension: 0.1,
-            });
-        }
-
-        if (this.showSteps) {
-            datasets.push({
-                label: 'Steps',
-                data: hdata.map((record) => record.health_data.steps),
-                borderColor: 'rgba(153, 102, 255, 1)',
-                tension: 0.1,
-            });
-        }
-
-        if (this.showWeight) {
-            datasets.push({
-                label: 'Weight',
-                data: hdata.map((record) => record.health_data.weight),
-                borderColor: 'rgba(255, 159, 64, 1)',
-                tension: 0.1,
-            });
-        }
+        
 
         const ctx = canvas.getContext('2d');
 
@@ -206,30 +182,32 @@ export default {
             },
         });
     },
+    
+    btnClick(key) {
+        // Toggle the selected attribute
+        this.selectedAttribute = key;
+        this.selectAttribute();
+      },
 
-    toggleChartData() {
-        this.order = (this.order + 1)%5;
-
-        if (this.order === 0){
-            this.showWeight = false;
-            this.showBMI = true;
-        }else if (this.order === 1){
-            this.showBMI = false;
-            this.showBodyFat = true;
-        }else if (this.order === 2){
-            this.showBodyFat = false;
-            this.showCalories = true;
-        }else if (this.order === 3){
-            this.showCalories = false;
-            this.showSteps = true;
-        }else if (this.order === 4){
-            this.showSteps = false;
-            this.showWeight = true;
-        }
-
+      selectAttribute() {
+        // When the selected attribute changes, re-render the chart
         const hdata = this.healthData.data;
         this.renderChart(hdata);
-    },
+      },
+
+      getBorderColor(key) {
+        // Assign colors dynamically based on the field key (you can customize this)
+
+        const colors = {
+          bmi: 'rgba(75, 192, 192, 1)',
+          body_fat_percentage: 'rgba(255, 99, 132, 1)',
+          calories_burned: 'rgba(54, 162, 235, 1)',
+          steps: 'rgba(153, 102, 255, 1)',
+          weight: 'rgba(255, 159, 64, 1)',
+        };
+        return colors[key] || 'rgba(0, 0, 0, 1)'; // Default color
+      },
+
     }
 };
 
