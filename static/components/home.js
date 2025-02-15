@@ -7,7 +7,7 @@ export default {
         <div class="poster-content">
           <h1 class="poster-title">Seek</h1>
           <p class="poster-subtitle">Sort and manage your club.</p>
-          <button class="button-1" @click="goToRegister">Get Started</button>
+          <button class="btn btn-1" @click="goToRegister">Get Started</button>
         </div>
       </section>
 

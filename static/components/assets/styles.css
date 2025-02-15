@@ -21,8 +21,6 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: var(--primary-gradient);
-  font-family: Arial, sans-serif;
   color: #fff;
 }
 
@@ -47,12 +45,6 @@
   margin-bottom: 25px;
   font-weight: bold;
   color: #f0f0f0;
-}
-
-
-.form-label {
-  color: #b0c4de;
-  font-weight: 500;
 }
 
 .form-control {
@@ -95,6 +87,16 @@
 .btn-2.active:hover {
   background: var(--primary-color-light);
   color: white;
+}
+
+.btn-1 {
+  background: var(--secondary-gradient);
+  color: white;
+}
+
+.btn-1:hover {
+  background: var(--hover-secondary);
+  /* background-color: #0052cc; */
 }
 
 .button-1 {
@@ -190,34 +192,9 @@
   margin-bottom: 40px;
 }
 
-/* .feature-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
-  justify-content: center;
-}
-
-.feature-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-} */
-
 .feature-card:hover {
   transform: scale(1.05);
 }
-/* 
-.feature-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-} */
 
 .feature-title {
   font-size: 1.2rem;
@@ -324,7 +301,7 @@
 
 .form-label {
   color: #b0c4de;
-  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .form-control {
@@ -427,14 +404,6 @@ body {
   flex-direction: column;
 }
 
-.form-label {
-  color: #333;
-  font-weight: 500;
-  margin-bottom: 5px;
-  display: block;
-  flex: 1;
-}
-
 .form-control {
   background: #fff;
   border: 1px solid #ccc;
@@ -450,3 +419,134 @@ body {
   border-color: #0052cc;
   box-shadow: 0 0 5px rgba(0, 82, 204, 0.3);
 }
+
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+
+  @media (max-width: 768px) {
+    .login-container, .register-container {
+      max-width: 90%;
+      padding: 30px;
+    }
+  
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar-brand {
+      font-size: 1.3rem;
+    }
+  
+    .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .nav-link {
+      font-size: 1rem;
+    }
+  
+    .feature-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .cta-section {
+      padding: 40px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-brand {
+      font-size: 1.1rem;
+    }
+  
+    .nav-link {
+      font-size: 0.9rem;
+    }
+  
+    .login-title, .register-title {
+      font-size: 1.6rem;
+    }
+  
+    .form-control {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .button-1 {
+      font-size: 0.9rem;
+    }
+  
+    .cta-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+  }
+  
+  .poster {
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;  /* Larger padding for larger screens */
+  }
+  
+  .poster-content {
+    max-width: 700px;
+    width: 100%;  /* Ensure the content scales with screen size */
+  }
+  
+  .poster-title {
+    font-size: 2.8rem;  /* Larger text for bigger screens */
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .poster-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #d0d0d0;
+  }
+  
+  /* Responsive adjustments for mobile and tablet */
+  @media (max-width: 768px) {
+    .poster {
+      padding: 60px 20px;  /* Reduce padding on tablets */
+    }
+  
+    .poster-title {
+      font-size: 2.2rem;  /* Slightly smaller title for tablets */
+    }
+  
+    .poster-subtitle {
+      font-size: 1rem;  /* Adjust subtitle font size */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .poster {
+      padding: 40px 15px;  /* Less padding for mobile devices */
+    }
+  
+    .poster-title {
+      font-size: 1.8rem;  /* Smaller title for smaller screens */
+    }
+  
+    .poster-subtitle {
+      font-size: 0.9rem;  /* Adjust subtitle for mobile screens */
+    }
+  }
+  
